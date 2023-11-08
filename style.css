@@ -30,7 +30,6 @@ body {
     min-height: 100vh;
     background-color: var(--clr-background);
     margin: 0;
-    overflow: hidden;
 }
 
 header {
@@ -66,9 +65,8 @@ main {
 }
 
 footer {
-    position: absolute;
     width: 100%;
-    bottom: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     box-shadow: 0 0 5px white
