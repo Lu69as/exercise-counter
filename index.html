@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise Counter+</title>
+    <link rel="icon" href="./icon.webp">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <main>
+        <div id="celebrate"></div>
+        <h1>Exercise Counter</h1>
+        <p>Count how many exercises of certain types you have done and set goals.</p>
+
+        <section style="margin-top: 2em;">
+            <div class="add_exercise">
+                <input id="exercise" type="text" placeholder="Exercise...">
+                <input id="goal" type="number" placeholder="Goal...">
+
+                <button class="button">Add Exercise</button>
+                <button class="button">Save Exercises</button>
+            </div>
+
+            <div class="list_exercises">
+                <table class="exercise_table">
+                    <tr>
+                        <th>Exercises:</th>
+                        <th>Goal:</th>
+                        <th>Amount:</th>
+                        <th>Actions:</th>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p><a href="https://github.com/lu69as" target="_blank" rel="noopener noreferrer">Lukas Okkenhaug</a> 2023</p>
+    </footer>
+</body>
+</html>
