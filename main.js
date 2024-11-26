@@ -21,24 +21,7 @@ function addExercise(exercises) {
 
 
     let actions = document.createElement("td");
-    if (exercise[4] == "Reps" || exercise[4] == "Kg") {
-        actions.innerHTML = `
-        <button class="button">Add 5</button>
-        <button class="button">Add 10</button>
-        <button class="button" style="background: #ff0033;">Remove</button>
-        `;
-        actions.querySelectorAll("button").forEach((e) => {
-            if (e.innerHTML.includes("Add")) {
-                e.addEventListener("click", () => {
-                    e.parentElement.parentElement.querySelector("input").value 
-                    = e.parentElement.parentElement.querySelector("input").value - 0 + (e.innerHTML.split(" ")[1] - 0);
-                    percentChange(e);
-                });
-            }
-            else e.addEventListener("click", () => e.parentElement.parentElement.remove());
-        });
-    }
-    else if (exercise[4] == "Seconds") {
+    if (exercise[4] == "Seconds") {
         actions.innerHTML = `
         <button class="button">Start Time</button>
         <button class="button" style="display: none">Pause Time</button>
@@ -70,7 +53,24 @@ function addExercise(exercises) {
             }
             else e.addEventListener("click", () => e.parentElement.parentElement.remove());
         });
-    };
+    }
+    else {
+        actions.innerHTML = `
+        <button class="button">Add 5</button>
+        <button class="button">Add 10</button>
+        <button class="button" style="background: #ff0033;">Remove</button>
+        `;
+        actions.querySelectorAll("button").forEach((e) => {
+            if (e.innerHTML.includes("Add")) {
+                e.addEventListener("click", () => {
+                    e.parentElement.parentElement.querySelector("input").value 
+                    = e.parentElement.parentElement.querySelector("input").value - 0 + (e.innerHTML.split(" ")[1] - 0);
+                    percentChange(e);
+                });
+            }
+            else e.addEventListener("click", () => e.parentElement.parentElement.remove());
+        });
+    }
 
     row.appendChild(actions);
     document.querySelector("tbody").appendChild(row);
@@ -103,6 +103,12 @@ document.querySelector(".add_exercise button").addEventListener("click", (e) => 
         + parent.querySelector(".goal").value +'§0§'
         + parent.querySelector(".type").value;
     addExercise(rowString);
+})
+
+document.querySelectorAll(".typeDropDown li").forEach((e) => {
+    e.addEventListener("click", () => {
+        e.parentElement.previousElementSibling.value = e.innerHTML;
+    });
 })
 
 function percentChange(item) {

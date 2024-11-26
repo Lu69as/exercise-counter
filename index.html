@@ -19,11 +19,15 @@
 
         <section style="margin-top: 2em;">
             <div class="add_exercise">
-                <select class="type">
-                    <option value="Reps">Reps</option>
-                    <option value="Seconds">Seconds</option>
-                    <option value="Kg">Kg</option>
-                </select>
+                <div class="typeContainer">
+                    <input class="type" type="text">
+                    <ul class="typeDropDown">
+                        <li>Reps</li>
+                        <li>Seconds</li>
+                        <li>Kg</li>
+                    </ul>
+                </div>
+
                 <input class="exercise" type="text" placeholder="Exercise...">
                 <input class="goal" type="number" placeholder="Goal...">
 
