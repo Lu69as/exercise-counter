@@ -19,8 +19,13 @@
 
         <section style="margin-top: 2em;">
             <div class="add_exercise">
-                <input id="exercise" type="text" placeholder="Exercise...">
-                <input id="goal" type="number" placeholder="Goal...">
+                <select class="type">
+                    <option value="Reps">Reps</option>
+                    <option value="Seconds">Seconds</option>
+                    <option value="Kg">Kg</option>
+                </select>
+                <input class="exercise" type="text" placeholder="Exercise...">
+                <input class="goal" type="number" placeholder="Goal...">
 
                 <button class="button">Add Exercise</button>
             </div>
@@ -37,8 +42,9 @@
             </div>
         </section>
     </main>
-    <footer>
-        <p><a href="https://github.com/lu69as" target="_blank" rel="noopener noreferrer">Lukas Okkenhaug</a> 2023</p>
-    </footer>
+    <footer><p>
+        <a href="https://lukasokken.com" target="_blank" rel="noopener noreferrer">Lukas Okkenhaug</a> 
+        <span><img src onerror="this.parentElement.innerHTML = new Date().getFullYear()"></span>
+    </p></footer>
 </body>
 </html>
