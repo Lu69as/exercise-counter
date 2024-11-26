@@ -48,6 +48,7 @@ footer {
                 opacity: 1;
                 transition-delay: none;
                 transform: translateY(-10px);
+                pointer-events: all;
             }
             &::before {
                 transform: translateY(-50%) rotate(135deg);
@@ -80,6 +81,7 @@ footer {
             transition: 200ms;
             transform: translateY(10px);
             transition-delay: 100ms;
+            pointer-events: none;
 
 
             li { 

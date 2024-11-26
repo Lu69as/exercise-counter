@@ -1,4 +1,5 @@
-let tempLocal = localStorage.getItem("exercises") || `|§Sit-up§20§10§Reps|§Plank§1§0§Seconds`;
+let tempLocal = localStorage.getItem("exercises") || `|§Push ups§10§0§Reps|§Sit ups§15§0§Reps|§Plank§20§0§Seconds`;
+let timeLoaded = new Date();
 
 function addExercise(exercises) {
     let errorTest;
@@ -16,6 +17,7 @@ function addExercise(exercises) {
     let inputParent = document.createElement("td");
     let input = document.createElement("input");
     input.value = exercise[3];
+    input.addEventListener("keyup", () => percentChange(input))
     inputParent.appendChild(input);
     row.appendChild(inputParent);
 
@@ -106,9 +108,7 @@ document.querySelector(".add_exercise button").addEventListener("click", (e) => 
 })
 
 document.querySelectorAll(".typeDropDown li").forEach((e) => {
-    e.addEventListener("click", () => {
-        e.parentElement.previousElementSibling.value = e.innerHTML;
-    });
+    e.addEventListener("click", () => e.parentElement.previousElementSibling.value = e.innerHTML );
 })
 
 function percentChange(item) {
@@ -116,7 +116,7 @@ function percentChange(item) {
     let percent = (parent.querySelector("input").value / parent.firstElementChild.nextElementSibling.innerHTML.split(" ")[0]) * 100;
 
     parent.style.setProperty('--percent', `${percent}%`);
-    if (percent == 100) setTimeout(celebrate, 200)
+    if (percent >= 100 && new Date() - timeLoaded > 1000) setTimeout(celebrate, 200)
 };
 
 let myCanvas = document.createElement('canvas');
