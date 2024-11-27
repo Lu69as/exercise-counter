@@ -141,6 +141,32 @@ table {
             font-size: 1.333rem;
             background-color: var(--clr-secondary)
         }
+        th:first-child {
+            max-width: max-content;
+        }
+
+        td.move {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+
+            padding: none;
+
+            div {
+                display: block;
+                position: relative;
+                width: 0;
+                border-bottom: solid 20px #ddd;
+                border-left: solid 15px transparent;
+                border-right: solid 15px transparent;
+                transition: 200ms;
+                cursor: pointer;
+            }
+            div:last-child { transform: rotate(180deg); }
+            div:hover { border-bottom: solid 20px #fff; }
+        }
 
         input { width: 100%; }
         td:has(input)::after {
@@ -165,17 +191,21 @@ table {
     width: 100%;
 }
 
-@media (width < 930px) {
+@media (max-width: 1078px) {
     .add_exercise {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
-    button, input, select { width: 100%; }
-    tr:nth-child(1) {
-        display: none;
+    button, input, .typeContainer { width: 100%; }
+    tr:nth-child(1), td.move, th:first-child {
+        display: none !important;
         border: 0 !important;
+    }
+    td:has(input) {
+        display: flex;
+        flex-direction: column;
     }
     tr {
         padding: 20px 0 !important;
@@ -190,7 +220,7 @@ table {
     
 }
 
-@media (width < 460px) {
+@media (max-width: 460px) {
     tr td:last-child {
         display: flex;
         flex-direction: column;

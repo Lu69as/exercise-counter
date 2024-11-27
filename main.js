@@ -10,6 +10,7 @@ function addExercise(exercises) {
     let exercise = exercises.split("§");
 
     row.innerHTML = `
+        <td class="move"><div></div><div></div></td>
         <td>${exercise[1]}</td>
         <td>${exercise[2]} ${exercise[4]}</td>
     `;
@@ -90,10 +91,10 @@ function initExercises() {
 function saveExercises() {
     let str = "";
     document.querySelectorAll("tr:has(td)").forEach((e) => {
-        str += '|§' + e.firstElementChild.innerHTML + '§';
-        str += e.firstElementChild.nextElementSibling.innerHTML.split(" ")[0] + '§';
+        str += '|§' + e.firstElementChild.nextElementSibling.innerHTML + '§';
+        str += e.firstElementChild.nextElementSibling.nextElementSibling.innerHTML.split(" ")[0] + '§';
         str += e.querySelector("input").value + '§';
-        str += e.firstElementChild.nextElementSibling.innerHTML.split(" ")[1];
+        str += e.firstElementChild.nextElementSibling.nextElementSibling.innerHTML.split(" ")[1];
     });
     localStorage.setItem("exercises", str);
 }
@@ -113,7 +114,7 @@ document.querySelectorAll(".typeDropDown li").forEach((e) => {
 
 function percentChange(item) {
     let parent = item.nodeName == "TR" ? item : item.parentElement.parentElement;
-    let percent = (parent.querySelector("input").value / parent.firstElementChild.nextElementSibling.innerHTML.split(" ")[0]) * 100;
+    let percent = (parent.querySelector("input").value / parent.firstElementChild.nextElementSibling.nextElementSibling.innerHTML.split(" ")[0]) * 100;
 
     parent.style.setProperty('--percent', `${percent}%`);
     if (percent >= 100 && new Date() - timeLoaded > 1000) setTimeout(celebrate, 200)
@@ -131,3 +132,20 @@ function celebrate() {
 
 initExercises();
 setInterval(saveExercises, 1000);
+
+document.querySelectorAll("td.move").forEach((e) => {
+    e.firstElementChild.addEventListener("click", () => {
+        let table = e.parentElement.parentElement;
+        let current = e.parentElement;
+        let next = e.parentElement.previousElementSibling;
+        try { table.insertBefore(current, next); }
+        catch (err) {  }
+    });
+    e.lastElementChild.addEventListener("click", () => {
+        let table = e.parentElement.parentElement;
+        let current = e.parentElement;
+        let next = e.parentElement.nextElementSibling;
+        try { table.insertBefore(next, current); }
+        catch (err) {  }
+    })
+})
