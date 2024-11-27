@@ -121,7 +121,7 @@ td:has(> .button), .add_exercise {
 }
 
 table {
-    border: 1px solid rgba(128, 128, 128, .7019607843);
+    border: 1px solid rgba(128, 128, 128, .6);
     border-collapse: collapse;
     border-radius: 10px;
     width: 100%;
@@ -139,11 +139,9 @@ table {
         }
         th {
             font-size: 1.333rem;
-            background-color: var(--clr-secondary)
+            background: var(--clr-secondary)
         }
-        th:first-child {
-            max-width: max-content;
-        }
+        th:first-child { max-width: max-content; }
 
         td.move {
             display: flex;
@@ -183,7 +181,7 @@ table {
         }
     }
 
-    tr:nth-child(odd) { background-color: var(--clr-secondary) }
+    tr:nth-child(odd) { background: var(--clr-secondary); }
 }
 
 #celebrate {

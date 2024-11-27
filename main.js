@@ -117,7 +117,7 @@ function percentChange(item) {
     let percent = (parent.querySelector("input").value / parent.firstElementChild.nextElementSibling.nextElementSibling.innerHTML.split(" ")[0]) * 100;
 
     parent.style.setProperty('--percent', `${percent}%`);
-    if (percent >= 100 && new Date() - timeLoaded > 1000) setTimeout(celebrate, 200)
+    if (percent >= 100 && percent < 105 && new Date() - timeLoaded > 1000 && item.nodeName != "TR") setTimeout(celebrate, 200)
 };
 
 let myCanvas = document.createElement('canvas');
@@ -138,14 +138,58 @@ document.querySelectorAll("td.move").forEach((e) => {
         let table = e.parentElement.parentElement;
         let current = e.parentElement;
         let next = e.parentElement.previousElementSibling;
-        try { table.insertBefore(current, next); }
-        catch (err) {  }
+
+        if (next.firstElementChild.nodeName == "TH") return;
+
+        let wasOdd = false;
+        document.querySelectorAll("table tr:nth-child(odd)").forEach((e) => {
+            if (e == current) {
+                next.setAttribute("style", "transform: translateY(100%); transition: 200ms; background: #0c1822;");
+                current.setAttribute("style", "transform: translateY(-100%); transition: 200ms; background: transparent");
+                wasOdd = true;
+            }
+        })
+        if (!wasOdd) {
+            next.setAttribute("style", "transform: translateY(100%); transition: 200ms; background: transparent;");
+            current.setAttribute("style", "transform: translateY(-100%); transition: 200ms; background: #0c1822;");
+        }
+
+        setTimeout(() => {
+            next.setAttribute("style", "");
+            current.setAttribute("style", "");
+            table.insertBefore(current, next);
+
+            percentChange(current);
+            percentChange(next);
+        }, 200);
     });
     e.lastElementChild.addEventListener("click", () => {
         let table = e.parentElement.parentElement;
         let current = e.parentElement;
         let next = e.parentElement.nextElementSibling;
-        try { table.insertBefore(next, current); }
-        catch (err) {  }
+
+        if (next == null) return;
+
+        let wasOdd = false;
+        document.querySelectorAll("table tr:nth-child(odd)").forEach((e) => {
+            if (e == current) {
+                next.setAttribute("style", "transform: translateY(-100%); transition: 200ms; background: #0c1822;");
+                current.setAttribute("style", "transform: translateY(100%); transition: 200ms; background: transparent");
+                wasOdd = true;
+            }
+        })
+        if (!wasOdd) {
+            next.setAttribute("style", "transform: translateY(-100%); transition: 200ms; background: transparent;");
+            current.setAttribute("style", "transform: translateY(100%); transition: 200ms; background: #0c1822;");
+        }
+
+        setTimeout(() => {
+            next.setAttribute("style", "");
+            current.setAttribute("style", "");
+            table.insertBefore(next, current);
+
+            percentChange(current);
+            percentChange(next);
+        }, 200);
     })
 })
